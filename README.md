@@ -2,7 +2,7 @@
 
 Array and Object 
 - [x] exercise 1 
-- [ ] exercise 2
+- [x] exercise 2
 - [ ] exercise 3 
 
 String and Regex
@@ -10,9 +10,9 @@ String and Regex
 - [x] Validate Password
 
 Carousel
-- [ ] Main photo
+- [x] Main photo
 - [ ] List of small photo
-- [ ] Navigate button
+- [x] Navigate button
 
 Mapbox
 
