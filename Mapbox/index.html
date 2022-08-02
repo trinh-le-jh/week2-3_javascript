@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map with Mapbox</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet'/>
+    <style>
+        #map {
+            width: 800px;
+            height: 500px;
+            display: flex;
+            margin: auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div id='map' style=''></div>
+</main>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoidHJpbmhsZTMxNiIsImEiOiJjbDZia2oyY3QwMmVxM2NwMnBwNGcyM3NnIn0.4PtWqYmP2Cp1U4mT52URRw';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11'
+  });
+  map.on('load', () => {
+    map.loadImage(
+      'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+      (error, image) => {
+        if (error) throw error;
+        map.addImage('custom-marker', image);
+        map.addSource('points', {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [{
+              'type': 'Feature',
+              'geometry': {
+                'type': 'Point',
+                'coordinates': [106.688708, 10.7476759]
+              },
+              'properties': {'title': 'Nguyen Lam Tower'}
+            }]
+          }
+        });
+
+        map.addLayer({
+          'id': 'points',
+          'type': 'symbol',
+          'source': 'points',
+          'layout': {
+            'icon-image': 'custom-marker',
+            'text-field': ['get', 'title'],
+            'text-font': [
+              'Open Sans Semibold',
+              'Arial Unicode MS Bold'
+            ],
+            'text-offset': [0, 1.25],
+            'text-anchor': 'top'
+          }
+        });
+      }
+    );
+    map.flyTo({
+      center: [106.688708, 10.7476759],
+      zoom: 13,
+      duration: 8000,
+    });
+    setTimeout(function () {
+      new mapboxgl.Popup()
+        .setLngLat([106.688708, 10.7476759])
+        .setHTML('<strong>Journey Horizon is here</strong><p>You will love the people you work with.</p>')
+        .addTo(map);
+    }, 8000)
+  });
+</script>
+</body>
+</html>
