@@ -6,79 +6,56 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet'/>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-        #map {
+        .map {
             width: 800px;
             height: 500px;
             display: flex;
             margin: auto;
             max-width: 100%;
         }
+
+        .geocoder {
+            margin: 20px auto;
+            width: fit-content;
+            box-shadow: 0 0 10px 2px rgb(0 0 0 / 10%);
+        }
+        input {
+            padding: 6px 16px !important;
+        }
+        .suggestions {
+            list-style-type: none;
+            max-width: 250px;
+            overflow: hidden;
+            padding: 10px;
+        }
+        .suggestions li {
+            padding: 10px;
+        }
+        .suggestions li:nth-child(2n-1) {
+            background-color: #e9e9e9;
+        }
     </style>
 </head>
 <body>
 <main>
-    <div id='map' style=''></div>
+    <div id='map' class="map"></div>
+    <div class="geocoder">
+        <input type="search" class="mapboxgl-ctrl-geocoder--input" placeholder="Search" aria-label="Search" oninput="onChange(this.value)">
+        <div class="suggestions-wrapper">
+            <ul class="suggestions" style="display: none;" id="suggestions">
+            </ul>
+        </div>
+    </div>
 </main>
-
-<script>
-  mapboxgl.accessToken = 'pk.eyJ1IjoidHJpbmhsZTMxNiIsImEiOiJjbDZia2oyY3QwMmVxM2NwMnBwNGcyM3NnIn0.4PtWqYmP2Cp1U4mT52URRw';
-  var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11'
-  });
-  map.on('load', () => {
-    map.loadImage(
-      'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
-      (error, image) => {
-        if (error) throw error;
-        map.addImage('custom-marker', image);
-        map.addSource('points', {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [{
-              'type': 'Feature',
-              'geometry': {
-                'type': 'Point',
-                'coordinates': [106.688708, 10.7476759]
-              },
-              'properties': {'title': 'Nguyen Lam Tower'}
-            }]
-          }
-        });
-
-        map.addLayer({
-          'id': 'points',
-          'type': 'symbol',
-          'source': 'points',
-          'layout': {
-            'icon-image': 'custom-marker',
-            'text-field': ['get', 'title'],
-            'text-font': [
-              'Open Sans Semibold',
-              'Arial Unicode MS Bold'
-            ],
-            'text-offset': [0, 1.25],
-            'text-anchor': 'top'
-          }
-        });
-      }
-    );
-    map.flyTo({
-      center: [106.688708, 10.7476759],
-      zoom: 13,
-      duration: 8000,
-    });
-    setTimeout(function () {
-      new mapboxgl.Popup()
-        .setLngLat([106.688708, 10.7476759])
-        .setHTML('<strong>Journey Horizon is here</strong><p>You will love the people you work with.</p>')
-        .addTo(map);
-    }, 8000)
-  });
-</script>
+<script src="script.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+      type="text/css">
 </body>
 </html>

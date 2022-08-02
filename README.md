@@ -18,4 +18,6 @@ Mapbox
 - [x] Display map
 - [x] Display marker
 - [x] Display info card
-- [ ] Location autocomplete suggestion form
+- [x] Send api get list suggestion
+- [x] Show list suggestion
+- [ ] Focus in map and display name in input when click one suggestion
