@@ -11,9 +11,9 @@ String and Regex
 
 Carousel
 - [x] Main photo
-- [ ] List of small photo
+- [x] List of small photo
 - [x] Navigate button
-- [ ] Animation when change image
+- [x] Animation when change image
 
 Mapbox
 - [x] Display map

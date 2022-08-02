@@ -26,6 +26,55 @@
                 width: auto;
                 margin: auto;
             }
+            .carousel-small-images {
+                height: 100px;
+                width: 300px;
+                position: absolute;
+                left: 0;
+                display: flex;
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                bottom: unset;
+            }
+            .carousel-small-images li {
+                width: 100px !important;
+                height: 100px !important;
+                padding: 16px;
+                margin: 0;
+                text-indent: unset;
+                border: none;
+            }
+            .carousel-small-images .active {
+                animation: wiggle;
+                animation-duration: 3s;
+                animation-timing-function: linear;
+                animation-iteration-count: unset;
+                animation-delay: 0.5s;
+            }
+            @keyframes wiggle {
+                0%, 7% {
+                    transform: rotateZ(0);
+                }
+                15% {
+                    transform: rotateZ(-15deg);
+                }
+                20% {
+                    transform: rotateZ(10deg);
+                }
+                25% {
+                    transform: rotateZ(-10deg);
+                }
+                30% {
+                    transform: rotateZ(6deg);
+                }
+                35% {
+                    transform: rotateZ(-4deg);
+                }
+                40%, 100% {
+                    transform: rotateZ(0);
+                }
+            }
         </style>
     </head>
     <body>
@@ -51,6 +100,18 @@
                     <span class="icon-next" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
+
+                <ol class="carousel-indicators carousel-small-images">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active">
+                        <img src="https://i.pinimg.com/564x/35/48/11/3548115b047239ec44e48829458c53d3.jpg">
+                    </li>
+                    <li data-target="#myCarousel" data-slide-to="1">
+                        <img src="https://i.pinimg.com/564x/bc/e6/2e/bce62effb115ed32d3e6dceb0e7b2218.jpg"/>
+                    </li>
+                    <li data-target="#myCarousel" data-slide-to="2">
+                        <img src="https://i.pinimg.com/564x/33/c2/aa/33c2aa58a1b474486d581a9ce32900a9.jpg"/>
+                    </li>
+                </ol>
             </div>
         </div>
     </body>
