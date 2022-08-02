@@ -1,23 +1,38 @@
 const duplicateArray = [1,2,2,3,4,4,4,5,6]
 
-const uniqueBySet = [...new Set(duplicateArray)]
-
-console.log(uniqueBySet)
-
-const uniqueByFilter = duplicateArray.filter((i, idx) => {
-  return duplicateArray.indexOf(i) === idx
-})
-
-console.log(uniqueByFilter)
-
-let i = 0
-let length = duplicateArray.length
-while (i < length) {
-  if(duplicateArray.indexOf(duplicateArray[i]) !== i ) {
-    duplicateArray.splice(i, 1)
-    length = duplicateArray.length
-  } else
-    i += 1
+const removeDuplicateBySet = (arr) => {
+  return [...new Set(arr)]
 }
 
-console.log(duplicateArray)
+const removeDuplicateByFilter = (arr) => {
+  return arr.filter((i, idx) => {
+    return arr.indexOf(i) === idx
+  })
+}
+
+const removeDuplicateWithLoop = (arr) => {
+  const copyArr = [...arr]
+  let i = 0
+  let length = copyArr.length
+  while (i < length) {
+    if(copyArr.indexOf(copyArr[i]) !== i ) {
+      copyArr.splice(i, 1)
+      length = copyArr.length
+    } else
+      i += 1
+  }
+  return copyArr
+}
+
+const main = () => {
+  console.log('Remove duplicate by using Set')
+  console.log(removeDuplicateBySet(duplicateArray))
+  
+  console.log('Remove duplicate by using Filter')
+  console.log(removeDuplicateByFilter(duplicateArray))
+  
+  console.log('Remove duplicate by go through a loop and remove duplicate')
+  console.log(removeDuplicateWithLoop(duplicateArray))
+}
+
+main()
