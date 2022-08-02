@@ -43,9 +43,9 @@
 </head>
 <body>
 <main>
-    <div id='map' class="map"></div>
+    <div id="map" class="map"></div>
     <div class="geocoder">
-        <input type="search" class="mapboxgl-ctrl-geocoder--input" placeholder="Search" aria-label="Search" oninput="onChange(this.value)">
+        <input type="search" id="input" class="mapboxgl-ctrl-geocoder--input" placeholder="Search" aria-label="Search" oninput="searchKeywords(this.value)">
         <div class="suggestions-wrapper">
             <ul class="suggestions" style="display: none;" id="suggestions">
             </ul>

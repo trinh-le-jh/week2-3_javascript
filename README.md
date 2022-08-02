@@ -13,6 +13,7 @@ Carousel
 - [x] Main photo
 - [ ] List of small photo
 - [x] Navigate button
+- [ ] Animation when change image
 
 Mapbox
 - [x] Display map
@@ -20,4 +21,4 @@ Mapbox
 - [x] Display info card
 - [x] Send api get list suggestion
 - [x] Show list suggestion
-- [ ] Focus in map and display name in input when click one suggestion
+- [x] Focus in map and display name in input when click one suggestion

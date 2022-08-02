@@ -5,8 +5,7 @@ const map = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/streets-v11'
 });
 const focusLocation = [106.689151, 10.747872]
-function onChange(text) {
-  console.log('The text has been changed.'+ text);
+function searchKeywords(text) {
   $.ajax({
     url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURI(text)}.json`,
     data: {
@@ -19,13 +18,25 @@ function onChange(text) {
     }
   })
 }
+function selectSuggestion (placeName, coordinates, parentNode) {
+  parentNode.style.display = 'none'
+  let input = document.querySelector('#input');
+  input.value = placeName
+  flyToLocation(coordinates)
+}
+function flyToLocation(coordinates) {
+  map.flyTo({
+    center: coordinates,
+    zoom: 13,
+    duration: 8000,
+  });
+}
 function appendResults (list) {
   let ul = document.querySelector('#suggestions');
   ul.innerHTML = ''
   
   if(!list.length) {
     ul.style.display = 'none'
-    console.log(list.length)
     return
   }
   
@@ -34,10 +45,12 @@ function appendResults (list) {
   let listSuggestion = list.map(suggestion => {
     let li = document.createElement('li')
     li.textContent = suggestion.place_name
+    li.style.cursor = 'pointer'
+    li.addEventListener('click', () => {
+      selectSuggestion(suggestion.place_name, suggestion.geometry.coordinates, ul)
+    })
     return li
   });
-  console.log(listSuggestion.length)
-  console.log(list.length)
   
   ul.append(...listSuggestion)
 }
@@ -76,14 +89,10 @@ map.on('load', () => {
           'text-offset': [0, 1.25],
           'text-anchor': 'top'
         }
-      });
+      })
     }
-  );
-  map.flyTo({
-    center: focusLocation,
-    zoom: 13,
-    duration: 8000,
-  });
+  )
+  flyToLocation(focusLocation)
   
   // Show infobox when done focus in location
   setTimeout(function () {
