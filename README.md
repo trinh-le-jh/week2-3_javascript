@@ -3,7 +3,7 @@
 Array and Object 
 - [x] exercise 1: remove duplicate
 - [x] exercise 2: get list of most common item
-- [ ] exercise 3: decision tree
+- [x] exercise 3: decision tree
 
 String and Regex
 - [x] Validate Email
