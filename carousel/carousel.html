@@ -3,79 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <style>
-            .container {
-                height: 100vh;
-                display: flex;
-            }
-            .item {
-                width: 460px;
-                height: 345px;
-                margin: auto;
-            }
-            .carousel-inner, .carousel {
-                width: 460px;
-                margin: auto;
-            }
-            img {
-                max-width: 100%;
-                height: 100% !important;
-                width: auto;
-                margin: auto;
-            }
-            .carousel-small-images {
-                height: 100px;
-                width: 300px;
-                position: absolute;
-                left: 0;
-                display: flex;
-                list-style-type: none;
-                padding: 0;
-                margin: 0;
-                bottom: unset;
-            }
-            .carousel-small-images li {
-                width: 100px !important;
-                height: 100px !important;
-                padding: 16px;
-                margin: 0;
-                text-indent: unset;
-                border: none;
-            }
-            .carousel-small-images .active {
-                animation: wiggle;
-                animation-duration: 3s;
-                animation-timing-function: linear;
-                animation-iteration-count: unset;
-                animation-delay: 0.5s;
-            }
-            @keyframes wiggle {
-                0%, 7% {
-                    transform: rotateZ(0);
-                }
-                15% {
-                    transform: rotateZ(-15deg);
-                }
-                20% {
-                    transform: rotateZ(10deg);
-                }
-                25% {
-                    transform: rotateZ(-10deg);
-                }
-                30% {
-                    transform: rotateZ(6deg);
-                }
-                35% {
-                    transform: rotateZ(-4deg);
-                }
-                40%, 100% {
-                    transform: rotateZ(0);
-                }
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
     </head>
     <body>
         <div class="container">
@@ -92,27 +21,26 @@
                     </div>
                 </div>
                 <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="icon-prev" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+                <a class="left carousel-button" role="button" onclick="previousImageShow()">
+                    <i class="arrow left"></i></p>
                 </a>
-                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                    <span class="icon-next" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
+                <a class="right carousel-button" role="button" onclick="nextImageShow()">
+                    <i class="arrow right"></i></p>
                 </a>
 
-                <ol class="carousel-indicators carousel-small-images">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active">
-                        <img src="https://i.pinimg.com/564x/35/48/11/3548115b047239ec44e48829458c53d3.jpg">
-                    </li>
-                    <li data-target="#myCarousel" data-slide-to="1">
-                        <img src="https://i.pinimg.com/564x/bc/e6/2e/bce62effb115ed32d3e6dceb0e7b2218.jpg"/>
-                    </li>
-                    <li data-target="#myCarousel" data-slide-to="2">
-                        <img src="https://i.pinimg.com/564x/33/c2/aa/33c2aa58a1b474486d581a9ce32900a9.jpg"/>
-                    </li>
-                </ol>
+
             </div>
+            <ol class="carousel-indicators carousel-small-images">
+                <li data-target="#myCarousel" data-slide-to="0">
+                    <img src="https://i.pinimg.com/564x/35/48/11/3548115b047239ec44e48829458c53d3.jpg">
+                </li>
+                <li data-target="#myCarousel" data-slide-to="1">
+                    <img src="https://i.pinimg.com/564x/bc/e6/2e/bce62effb115ed32d3e6dceb0e7b2218.jpg"/>
+                </li>
+                <li data-target="#myCarousel" data-slide-to="2">
+                    <img src="https://i.pinimg.com/564x/33/c2/aa/33c2aa58a1b474486d581a9ce32900a9.jpg"/>
+                </li>
+            </ol>
         </div>
     </body>
 </html>

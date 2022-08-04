@@ -1,15 +1,18 @@
 const duplicateArray = [1,2,2,3,4,4,4,5,6]
 
+// Complexity: O(n)
 const removeDuplicateBySet = (arr) => {
   return [...new Set(arr)]
 }
 
+// Complexity: O(n^2)
 const removeDuplicateByFilter = (arr) => {
   return arr.filter((i, idx) => {
     return arr.indexOf(i) === idx
   })
 }
 
+// Complexity: O(n^2)
 const removeDuplicateWithLoop = (arr) => {
   const copyArr = [...arr]
   let i = 0
