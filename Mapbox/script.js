@@ -1,22 +1,19 @@
 const token = 'pk.eyJ1IjoidHJpbmhsZTMxNiIsImEiOiJjbDZia2oyY3QwMmVxM2NwMnBwNGcyM3NnIn0.4PtWqYmP2Cp1U4mT52URRw'
+const markers = []
+
 mapboxgl.accessToken = token
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v11'
 })
 const initLocation = { placeName: 'Nguyen Lam Tower', coordinates: [106.689151, 10.747872]}
-function searchKeywords(text) {
-  $.ajax({
-    url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURI(text)}.json`,
-    data: {
-      'access_token' : token
-    },
-    type: 'GET',
-    dataType: 'json',
-    success: function (data) {
-      appendResults(data.features)
-    }
-  })
+async function searchKeywords (text) {
+  const res = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURI(text)}.json?access_token=${token}`)
+    .then(response => response)
+  if (res.status === 200) {
+    const data = await res.json()
+    appendResults(data.features)
+  }
 }
 function selectSuggestion (placeName, coordinates, parentNode) {
   parentNode.style.display = 'none'
@@ -26,43 +23,24 @@ function selectSuggestion (placeName, coordinates, parentNode) {
   flyToLocation(coordinates)
 }
 function createMarker ({placeName, coordinates}) {
-  const id = Math.random().toString(36).slice(2, 7)
-  map.addSource(id, {
-    'type': 'geojson',
-    'data': {
-      'type': 'FeatureCollection',
-      'features': [{
-        'type': 'Feature',
-        'geometry': {
-          'type': 'Point',
-          'coordinates': coordinates
-        },
-        'properties': {'title': placeName}
-      }]
-    }
-  })
+  const marker = new mapboxgl
+    .Marker()
+    .setLngLat(coordinates)
+    .addTo(map)
   
-  map.addLayer({
-    'id': id,
-    'type': 'symbol',
-    'source': id,
-    'layout': {
-      'icon-image': 'custom-marker',
-      'text-field': ['get', 'title'],
-      'text-font': [
-        'Open Sans Semibold',
-        'Arial Unicode MS Bold'
-      ],
-      'text-offset': [0, 1.25],
-      'text-anchor': 'top'
-    }
-  })
+  if(placeName.length) {
+    const popup = new mapboxgl.Popup().setText(placeName).addTo(map)
+    marker.setPopup(popup)
+  }
+  
+  markers.forEach(marker => { marker.remove() })
+  markers.push(marker)
 }
 function flyToLocation(coordinates) {
   map.flyTo({
     center: coordinates,
     zoom: 13,
-    duration: 8000,
+    duration: 3000,
   })
 }
 function appendResults (list) {
@@ -88,6 +66,7 @@ function appendResults (list) {
   
   ul.append(...listSuggestion)
 }
+
 map.on('load', () => {
   map.loadImage(
     'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
@@ -98,12 +77,9 @@ map.on('load', () => {
     }
   )
   flyToLocation(initLocation.coordinates)
-  
-  // Show infobox when done focus in location
-  setTimeout(function () {
-    new mapboxgl.Popup()
-      .setLngLat(initLocation.coordinates)
-      .setHTML('<strong>Journey Horizon is here</strong><p>You will love the people you work with.</p>')
-      .addTo(map)
-  }, 8000)
+  map.on('click', (e) => {
+    const lngLat = [e.lngLat.lng, e.lngLat.lat]
+    createMarker({placeName:'', coordinates: lngLat })
+    flyToLocation(lngLat)
+  })
 })
