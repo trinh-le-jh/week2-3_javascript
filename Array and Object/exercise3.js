@@ -1,37 +1,34 @@
-function ask(question) {
-  if (!question) return
-  
-  const answer = prompt(
-    question.question + '\n'
-    + question.answers.map( ({ answer }, idx) =>
-      '\n' + idx + '. ' + answer
-    )
-  )
-  
-  if(question[answer] === undefined)
-    return
-  
-  if (question.answers[answer].question) {
-    ask(question.answers[answer])
-    return
+class Node {
+  constructor(parent, value, children, callback) {
+    this.parent = parent
+    this.value = value
+    this.children = children
+    this.callback = callback
   }
   
-  if(question.answers[answer].comment)
-    alert(question.answers[answer].comment)
-}
-
-const questionTree = {
-  question: 'Do you have life?',
-  answers: [
-    {
-      answer: 'What the heck are you talking about?',
-      comment: 'Hmm...'
-    },
-    {
-      answer: 'No',
-      comment: 'You are a programmer'
+  getChild(value) {
+    if(!this.children) {
+      console.log('There is no child node')
+      return
     }
-  ]
+    return this.children.filter((child) => child.value === value)
+  }
 }
 
-ask(questionTree)
+
+// Create root node
+const root = new Node()
+
+// Add a function
+root.callback = (str) => str.length? 'Yes' : 'No'
+
+// Create child node
+const childNode = new Node(root, 'No', null, null)
+
+// Add child to list of children
+root.children = [ childNode ]
+
+const child = root.getChild(root.callback(''))
+
+console.log(root)
+console.log(child)
