@@ -1,34 +1,59 @@
-class Node {
-  constructor(parent, value, children, callback) {
-    this.parent = parent
-    this.value = value
-    this.children = children
-    this.callback = callback
-  }
-  
-  getChild(value) {
-    if(!this.children) {
-      console.log('There is no child node')
-      return
-    }
-    return this.children.filter((child) => child.value === value)
+// import myJson from './data.json' assert {type: 'json'};
+// console.log('myJson', myJson)
+
+const obj = {
+  "1": {
+    "id":"1",
+    "question": "what you gonna do today?",
+    "answers": [ 3 ],
+    "parentId": "0"
+    
+  },
+  "3": {
+    "id": "3",
+    "answer": "go to work",
+    "question": "where is the office?",
+    "answers": [ 4, 5 ],
+    "parentId": "1"
+  },
+  "4": {
+    "id": "5",
+    "answer": "District 1",
+    "comment": "I hear that the office has move.",
+    "parentId": "3"
+  },
+  "5": {
+    "id": "6",
+    "answer": "District 8",
+    "comment": "Have a nice day.",
+    "parentId": "3"
   }
 }
 
 
-// Create root node
-const root = new Node()
 
-// Add a function
-root.callback = (str) => str.length? 'Yes' : 'No'
+function ask(question) {
+  if (!question) return
 
-// Create child node
-const childNode = new Node(root, 'No', null, null)
+  const answer = prompt(
+    question.question + '\n'
+    + question.answers.map( (answerId, idx) =>
+      '\n' + idx + '. ' + obj[answerId].answer
+    )
+  )
+  
+  const nextQuestionId = question.answers[answer]
 
-// Add child to list of children
-root.children = [ childNode ]
+  if(obj[nextQuestionId] === undefined)
+    return
 
-const child = root.getChild(root.callback(''))
+  if (obj[nextQuestionId].question) {
+    ask(obj[nextQuestionId])
+    return
+  }
 
-console.log(root)
-console.log(child)
+  if(obj[nextQuestionId].comment)
+    alert(obj[nextQuestionId].comment)
+}
+
+ask(obj[1])
