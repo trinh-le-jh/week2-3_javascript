@@ -59,6 +59,8 @@ function ask(question) {
     alert(obj[nextQuestionId].comment)
 }
 
+console.log('5')
+
 ask(obj[1])
 
 console.log('4')
