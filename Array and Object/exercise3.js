@@ -62,3 +62,5 @@ function ask(question) {
 console.log('5')
 
 ask(obj[1])
+
+console.log('444444')
