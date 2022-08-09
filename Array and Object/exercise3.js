@@ -30,6 +30,7 @@ const obj = {
   }
 }
 
+console.log('1')
 
 
 function ask(question) {
