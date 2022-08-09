@@ -60,3 +60,5 @@ function ask(question) {
 }
 
 ask(obj[1])
+
+console.log('4')
