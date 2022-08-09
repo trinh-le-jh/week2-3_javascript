@@ -59,4 +59,4 @@ function ask(question) {
 
 ask(obj[1])
 
-console.log('4')
+console.log('444444')
