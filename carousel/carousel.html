@@ -1,44 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
         <script src="script.js"></script>
-    </head>
+
+        <title>Map with Mapbox</title>
     <body>
         <div class="container">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="https://i.pinimg.com/564x/35/48/11/3548115b047239ec44e48829458c53d3.jpg" width="460" height="345">
+                        <img
+                            src="https://i.pinimg.com/564x/35/48/11/3548115b047239ec44e48829458c53d3.jpg"
+                            alt=""
+                            width="460"
+                            height="345"
+                        >
                     </div>
                     <div class="item">
-                        <img src="https://i.pinimg.com/564x/bc/e6/2e/bce62effb115ed32d3e6dceb0e7b2218.jpg" width="460" height="345">
+                        <img
+                            src="https://i.pinimg.com/564x/bc/e6/2e/bce62effb115ed32d3e6dceb0e7b2218.jpg"
+                            alt=""
+                            width="460"
+                            height="345">
                     </div>
                     <div class="item">
-                        <img src="https://i.pinimg.com/564x/33/c2/aa/33c2aa58a1b474486d581a9ce32900a9.jpg" width="460" height="345">
+                        <img
+                            src="https://i.pinimg.com/564x/33/c2/aa/33c2aa58a1b474486d581a9ce32900a9.jpg"
+                            alt=""
+                            width="460"
+                            height="345"
+                        >
                     </div>
                 </div>
                 <!-- Left and right controls -->
-                <a class="left carousel-button" role="button" onclick="previousImageShow()">
-                    <i class="arrow left"></i></p>
+                <a
+                    class="left carousel-button"
+                    role="button"
+                    onclick="onBackBtnClick()"
+                >
+                    <i class="arrow left"></i>
                 </a>
-                <a class="right carousel-button" role="button" onclick="nextImageShow()">
-                    <i class="arrow right"></i></p>
+                <a
+                    class="right carousel-button"
+                    role="button"
+                    onclick="onNextBtnClick()"
+                >
+                    <i class="arrow right"></i>
                 </a>
 
 
             </div>
             <ol class="carousel-indicators carousel-small-images">
                 <li data-target="#myCarousel" data-slide-to="0">
-                    <img src="https://i.pinimg.com/564x/35/48/11/3548115b047239ec44e48829458c53d3.jpg">
+                    <img
+                        src="https://i.pinimg.com/564x/35/48/11/3548115b047239ec44e48829458c53d3.jpg"
+                        alt=""
+                    />
                 </li>
                 <li data-target="#myCarousel" data-slide-to="1">
-                    <img src="https://i.pinimg.com/564x/bc/e6/2e/bce62effb115ed32d3e6dceb0e7b2218.jpg"/>
+                    <img
+                        src="https://i.pinimg.com/564x/bc/e6/2e/bce62effb115ed32d3e6dceb0e7b2218.jpg"
+                        alt=""
+                    />
                 </li>
                 <li data-target="#myCarousel" data-slide-to="2">
-                    <img src="https://i.pinimg.com/564x/33/c2/aa/33c2aa58a1b474486d581a9ce32900a9.jpg"/>
+                    <img
+                        src="https://i.pinimg.com/564x/33/c2/aa/33c2aa58a1b474486d581a9ce32900a9.jpg"
+                        alt=""
+                    />
                 </li>
             </ol>
         </div>
