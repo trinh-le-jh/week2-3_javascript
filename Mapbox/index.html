@@ -10,6 +10,7 @@
         body {
             margin: 0;
         }
+
         .map {
             width: 100%;
             height: 100vh;
@@ -17,8 +18,9 @@
             margin: auto;
             max-width: 100%;
         }
+
         .geocoder {
-            width: fit-content;
+            width: 250px;
             box-shadow: 0 0 10px 2px rgb(0 0 0 / 10%);
             position: absolute;
             top: 16px;
@@ -26,23 +28,35 @@
             z-index: 1;
             background-color: white;
         }
+
+        .geocoder-input {
+            width: 100%;
+            border: none;
+        }
+
         input {
             padding: 6px 16px !important;
             box-shadow: 0 0 10px 2px rgb(0 0 0 / 10%);
         }
+
         .suggestions-wrapper {
             margin: 0;
+            max-width: 100%;
         }
+
         .suggestions {
+            display: none;
             list-style-type: none;
             max-width: 250px;
             overflow: hidden;
             padding: 10px;
             margin: 0;
         }
+
         .suggestions li {
             padding: 10px;
         }
+
         .suggestions li:nth-child(2n-1) {
             background-color: #e9e9e9;
         }
@@ -51,18 +65,33 @@
 <body>
 <main>
     <div class="geocoder">
-        <input type="search" id="input" class="mapboxgl-ctrl-geocoder--input" placeholder="Search" aria-label="Search" oninput="searchKeywords(this.value)">
+        <input
+            type="search"
+            id="input"
+            class="geocoder-input"
+            placeholder="Search"
+            aria-label="Search"
+            oninput="searchKeywords(this.value)"
+        />
         <div class="suggestions-wrapper">
-            <ul class="suggestions" style="display: none;" id="suggestions">
+            <ul
+                class="suggestions"
+                id="suggestions"
+            >
             </ul>
         </div>
     </div>
     <div id="map" class="map"></div>
 </main>
 <script src="script.js"></script>
-<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet"
-      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
-      type="text/css">
+<script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js">
+</script>
+
+<link
+    rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+    type="text/css"
+>
 </body>
 </html>
